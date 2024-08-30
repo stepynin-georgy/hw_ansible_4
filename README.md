@@ -18,7 +18,7 @@
 
 1. Создайте в старой версии playbook файл `requirements.yml` и заполните его содержимым:
 
-   ```yaml
+   ```
    ---
      - src: git@github.com:AlexeySetevoi/ansible-clickhouse.git
        scm: git
@@ -33,9 +33,32 @@
 6. Опишите в `README.md` обе роли и их параметры. Пример качественной документации ansible role [по ссылке](https://github.com/cloudalchemy/ansible-prometheus).
 7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт.
 8. Выложите все roles в репозитории. Проставьте теги, используя семантическую нумерацию. Добавьте roles в `requirements.yml` в playbook.
+
+[vector-role](https://github.com/stepynin-georgy/vector-role)
+
+[lighthouse-role](https://github.com/stepynin-georgy/lighthouse-role)
+
 9. Переработайте playbook на использование roles. Не забудьте про зависимости LightHouse и возможности совмещения `roles` с `tasks`.
 
-[site.yaml](https://github.com/stepynin-georgy/hw_ansible_4/blob/main/playbook/site.yml).
+Поправил playbook, для работы с ролями: [site.yaml](https://github.com/stepynin-georgy/hw_ansible_4/blob/main/playbook/site.yml). И проверил его работу:
+ 
+```
+---
+- name: Install Clickhouse
+  hosts: clickhouse
+  roles:
+    - clickhouse-role
+
+- name: Install Lighthouse
+  hosts: lighthouse
+  roles:
+    - lighthouse-role
+
+- name: Install Vector
+  hosts: vector
+  roles:
+    - vector-role
+```
 
 ```
 root@netology:/opt/ansible_hw4/playbook# ansible-playbook -i inventory/prod.yml site.yml 
