@@ -72,9 +72,25 @@ nginx_user_name: root
 6. Опишите в `README.md` обе роли и их параметры. Пример качественной документации ansible role [по ссылке](https://github.com/cloudalchemy/ansible-prometheus).
 7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт.
 
-Также, отредактировал meta-файл в каждой роли. Перенес все task из site.yml по отдельным ролям.
+Также отредактировал meta-файл в каждой роли. Перенес все task из site.yml по отдельным ролям.
 
 8. Выложите все roles в репозитории. Проставьте теги, используя семантическую нумерацию. Добавьте roles в `requirements.yml` в playbook.
+
+```
+---
+  - name: clickhouse 
+    src: git@github.com:AlexeySetevoi/ansible-clickhouse.git
+    scm: git
+    version: "1.11.0"
+  - name: vecror-role 
+    src: git@github.com:stepynin-georgy/vector-role.git
+    scm: git
+    version: "1.0.0"
+  - name: lighthouse-role 
+    src: git@github.com:stepynin-georgy/lighthouse-role.git
+    scm: git
+    version: "1.0.0"
+```
 
 [vector-role](https://github.com/stepynin-georgy/vector-role)
 
